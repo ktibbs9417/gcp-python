@@ -89,7 +89,7 @@ cloudbilling.googleapis.com
    * [Google Cloud SDK](https://cloud.google.com/sdk/docs/install)
 
 2. Initialize gcloud
-  <br />
+  
    _it is recommended that you already have a project created within GCP which you use to test and use as a playground since this will help with authentication if you are running this script locally_
    ```sh
    gcloud init

@@ -129,9 +129,9 @@ virtualenv <your-env>
 Within the working directory there is a `.env` which contains the following that need to be filled out prior to execution.
 ```sh
 # Specify if you are creating a new project or not
-CREATE_PROJECT=True
+CREATE_PROJECT=<True/False>
 # Attach project to shared VPC
-SHARED_VPC_ACCESS=True
+SHARED_VPC_ACCESS=<True/False>
 # GCP Folder ID
 GCP_FOLDER_ID=<folder-id>
 # GCP Project Name not unique
@@ -147,9 +147,9 @@ ENABLE_API="compute.googleapis.com,run.googleapis.com"
 # List of users to be able to access the Shared VPC e.g. "user:user@examples.com,roles/storage.admin;group:group@examples.com,roles/viewer"
 SHARED_VPC_USERS="user:user@example.com,roles/editor;serviceAccount:svc@example.com,roles/appengine.appAdmin;group:group@example.com,roles/viewer"
 # The Region of the Shared VPC Subnet
-SHARED_VPC_REGION=us-west2
+SHARED_VPC_REGION=<region>
 # The Subnet of the Shared VPC
-SHARED_VPC_SUBNET=us-west-la-dev
+SHARED_VPC_SUBNET=<subnet-name>
 
 ```
 

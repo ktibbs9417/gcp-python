@@ -76,6 +76,12 @@ The Billing User role is required on the billing account itself.
 roles/resourcemanager.projectCreator
 roles/billing.user
 ```
+#### Using Shared VPC
+If you are needing to create a project that needs to have access to a Shared VPC, the account running this script will need to have the following IAM Role [here](https://console.cloud.google.com/networking/xpn/details)
+
+```sh
+roles/compute.xpnAdmin
+```
 
 ### Required APIs
 APIs must be enabled on the project you are using to authenticate to when executing this script.
@@ -122,16 +128,28 @@ virtualenv <your-env>
 ### Populate the ENV file
 Within the working directory there is a `.env` which contains the following that need to be filled out prior to execution.
 ```sh
+# Specify if you are creating a new project or not
+CREATE_PROJECT=True
+# Attach project to shared VPC
+SHARED_VPC_ACCESS=True
 # GCP Folder ID
 GCP_FOLDER_ID=<folder-id>
-# GCP Project ID
-GCP_PROJECT_ID=<new-project-name>
+# GCP Project Name not unique
+GCP_PROJECT_NAME=<project-name>
+# GCP Project ID please leave blank if you do not have this yet! Used if you are not creating a new project
+GCP_PROJECT_ID=<project-id>
 # GCP Billing ID
 GCP_BILLING_ID=<billing-id>
-# List of Principals examples
+# List of Principals e.g. "user:user@examples.com,roles/storage.admin;group:group@examples.com,roles/viewer"
 IAM_PRINCIPALS_AND_ROLES="user:user@example.com,roles/editor;serviceAccount:svc@example.com,roles/appengine.appAdmin;group:group@example.com,roles/viewer"
-# List of APIs to enable example
-ENABLE_API="compute.googleapis.com,run.googleapis.com "
+# List of APIs to enable e.g. "compute.googleapis.com,run.googleapis.com"
+ENABLE_API="compute.googleapis.com,run.googleapis.com"
+# List of users to be able to access the Shared VPC e.g. "user:user@examples.com,roles/storage.admin;group:group@examples.com,roles/viewer"
+SHARED_VPC_USERS="user:user@example.com,roles/editor;serviceAccount:svc@example.com,roles/appengine.appAdmin;group:group@example.com,roles/viewer"
+# The Region of the Shared VPC Subnet
+SHARED_VPC_REGION=us-west2
+# The Subnet of the Shared VPC
+SHARED_VPC_SUBNET=us-west-la-dev
 
 ```
 

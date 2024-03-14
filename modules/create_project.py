@@ -1,18 +1,18 @@
 from dotenv import load_dotenv
 import os
 import random
+import time
 from google.cloud import (
     resourcemanager_v3,
     billing_v1,
     service_usage_v1,
-    
     )
 from google.iam.v1 import policy_pb2
 from google.api_core.exceptions import GoogleAPICallError
 import google.auth
 
 
-class CreateProject:
+class CreateProject():
     def __init__(self):
         load_dotenv()
         self.folder_id = f"folders/{os.getenv('GCP_FOLDER_ID')}"
@@ -21,8 +21,7 @@ class CreateProject:
         self.billing_id = f"billingAccounts/{os.getenv('GCP_BILLING_ID')}"
         self.iam_principals_and_roles = os.getenv('IAM_PRINCIPALS_AND_ROLES')
         self.enable_api = os.getenv('ENABLE_API')
-        self.credentials, _ = google.auth.default()
-        
+        self.credentials, _ = google.auth.default()  
 
     def _create_project(self):
         project_client =resourcemanager_v3.ProjectsClient(credentials=self.credentials)
@@ -43,6 +42,7 @@ class CreateProject:
             
             print("Creating project...")
             project_client.create_project(request=create_project_request)
+            time.sleep(180)
             print(f"Created successfully!")
             self._set_billing_account()
 
